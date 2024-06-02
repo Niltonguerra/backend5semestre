@@ -1,8 +1,8 @@
 # Node.js dependencies
-node_modules/
+./node_modules/
 
 # copia de seguraça
-backup/
+./backup/
 
 
 # Logs
@@ -14,5 +14,5 @@ npm-debug.log*
 .env
 
 # Build outputs
-dist/
-build/
+./dist/
+./build/
