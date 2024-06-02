@@ -1,8 +1,18 @@
-# arquivos para não subir para o git hub
+# Node.js dependencies
+node_modules/
 
-./dist
+# copia de seguraça
+backup/
 
-./node_modules
 
-./backup
+# Logs
+logs/
+*.log
+npm-debug.log*
 
+# Environment variables
+.env
+
+# Build outputs
+dist/
+build/
