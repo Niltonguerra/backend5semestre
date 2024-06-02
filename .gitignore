@@ -1,0 +1,8 @@
+# arquivos para não subir para o git hub
+
+./dist
+
+./node_modules
+
+./backup
+
