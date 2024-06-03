@@ -8,6 +8,7 @@ import { StoreModule } from './store/store.module';
 import { APP_PIPE } from '@nestjs/core';
 import { PaymentModule } from './payment/payment.module';
 import { AuthModule } from './auth/auth.module';
+import { RecomendacaoModule } from './recomendacao/recomendacao.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
     StoreModule,
     PaymentModule,
     AuthModule,
+    RecomendacaoModule,
   ],
   controllers: [AppController],
   providers: [

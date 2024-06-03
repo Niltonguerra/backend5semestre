@@ -11,8 +11,8 @@ export class Product {
   @Prop({ type: String })
   nome: string;
 
-  @Prop({ type: String })
-  preco: string;
+  @Prop({ type: Number })
+  preco: number;
 
   @Prop({ type: String })
   descricao: string;

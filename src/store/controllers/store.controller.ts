@@ -4,6 +4,7 @@ import { Store } from '../entities/store.entity';
 import { HashPasswordPipe } from '../pipes/passwordEncryption.pipe';
 import { CriaProductDTO } from 'src/product/dtos/CriarProduct.dto';
 import { CriaStoreDTO } from '../dtos/CriarStore.dto';
+import { AtualizaStoreDto } from '../dtos/AtualizarStore.dto';
 
 @Controller('store')
 export class StoreController {
@@ -22,7 +23,6 @@ export class StoreController {
   @Get()
   async findAll() {
     const retorno = await this.service.findAll();
-
     return retorno;
   }
 
@@ -79,7 +79,7 @@ export class StoreController {
 
 
   @Put(':id')
-  async update(@Body() store: Store, @Param('id') id: string) {
+  async update(@Body() store: AtualizaStoreDto, @Param('id') id: string) {
     const retorno = await this.service.update(store, id);
 
     return {

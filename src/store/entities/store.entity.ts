@@ -57,8 +57,8 @@ export class Store {
   @Prop({ type:Date, required: false })
   atualizado_em: Date;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false})
-  product_id?: Types.ObjectId[];
+  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'Product', required: false})
+  product_id?: string[];
 }
 
 export const StoreSchema = SchemaFactory.createForClass(Store);

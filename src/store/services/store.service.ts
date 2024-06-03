@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Store } from '../entities/store.entity';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { LoginStoreDTO } from '../dtos/LoginStore.dto';
+import { AtualizaStoreDto } from '../dtos/AtualizarStore.dto';
+import { ListaStoreDTO } from '../dtos/listaStore.dto';
+
 
 @Injectable()
 export class StoreService {
@@ -13,8 +16,27 @@ export class StoreService {
     return result;
   }
 
-  async findAll(): Promise<Store[]> {
-    return this.storeModel.find().exec();
+  async findAll(): Promise<ListaStoreDTO[]> {
+
+    const data = await this.storeModel.find().exec()
+
+
+    const retorno: ListaStoreDTO[] = data.map(item => ({
+      _id: item._id.toString(),
+      nome: item.nome,
+      email: item.email,
+      CNPJ: item.CNPJ, 
+      descricao: item.descricao, 
+      foto: item.foto, 
+      hor_abertura: item.hor_abertura, 
+      hor_encerramento: item.hor_encerramento, 
+      telefone: item.telefone, 
+      endereco: item.endereco, 
+      product_id : item.product_id ? item.product_id.toString() : 'não tem produtos relacionados a essa loja',
+    }));
+
+
+    return retorno;
   }
 
   async findById(id: string) {
@@ -58,12 +80,46 @@ export class StoreService {
 
 
 
-  async update(store: any, id: string) {
+  async update(store: AtualizaStoreDto, id: string) {
     const updatedStore = await this.storeModel
       .findByIdAndUpdate(id, store, { new: true })
       .exec();
     return updatedStore;
   }
+
+
+  async updateProductIdForStore(ProductID: string, StoreID: string) {
+    
+    const product = await this.findById(StoreID); 
+  
+    let ProductIDNovo: string[];
+  
+    // Verifica se o campo product_id existe no documento da loja
+    if (product.product_id && Array.isArray(product.product_id)) {
+      ProductIDNovo = [...product.product_id];
+    } else {
+      ProductIDNovo = [];
+    }
+  
+    // Verifica se o novo ProductID já existe no array
+    // if (!ProductIDNovo.includes(ProductID)) {
+      // Adiciona o novo ID de produto ao array
+      ProductIDNovo.push(ProductID);
+    // }
+  
+    const updatedStore = await this.storeModel
+      .findByIdAndUpdate(StoreID, { product_id: ProductIDNovo }, { new: true })
+      .exec();
+  
+    console.log(updatedStore);
+  
+    return updatedStore;
+  }
+  
+  
+  
+
+
 
   async remove(id: string) {
     const deletedStore = await this.storeModel.findByIdAndDelete(id).exec();

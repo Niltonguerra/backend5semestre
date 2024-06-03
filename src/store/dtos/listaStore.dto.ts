@@ -1,12 +1,16 @@
+import { Types } from "mongoose";
+
 export class ListaStoreDTO {
-  email: string;
+  _id: string;
   nome: string;
-  CPNJ: string;
-  senha: string;
+  email: string;
+  CNPJ: string;
   descricao: string;
   foto: string;
-  hor_abertura: Date;
-  hor_encerramento: Date;
+  hor_abertura: string;
+  hor_encerramento: string;
   telefone: string;
-  endereco: string[];
+  endereco: string;
 }
+
+ 

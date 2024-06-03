@@ -11,10 +11,6 @@ export class CriaProductDTO {
   nome: string;
 
   @IsNotEmpty({ message: 'O preço não pode ser vazio' })
-  @IsUrl({}, { message: 'A foto deve ser uma URL válida' })
-  foto: string;
-
-  @IsNotEmpty({ message: 'O preço não pode ser vazio' })
   @IsNumber({}, { message: 'O preço deve ser um número' })
   preco: number;
 
@@ -22,6 +18,9 @@ export class CriaProductDTO {
   @IsString({ message: 'A descrição deve ser uma string' })
   descricao: string;
 
+  @IsNotEmpty({ message: 'O preço não pode ser vazio' })
+  @IsUrl({}, { message: 'A foto deve ser uma URL válida' })
+  foto: string;
 
   @IsNotEmpty({ message: 'A quantidade não pode ser vazia' })
   @IsNumber({}, { message: 'A quantidade deve ser um número' })
