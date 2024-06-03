@@ -23,12 +23,15 @@ export class Product {
   @Prop({ type: Number })
   quantidade: number;
 
+  @Prop({ type: [String] })
+  tags: string[];
+
   @Prop({ type:Date, required: false })
   Criado_em: Date;
 
   @Prop({ type:Date, required: false })
   atualizado_em: Date;
-
+  
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Store' })
   store_id: string;
 

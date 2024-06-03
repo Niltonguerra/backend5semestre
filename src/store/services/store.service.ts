@@ -40,8 +40,13 @@ export class StoreService {
   }
 
   async findById(id: string) {
-    const result = await this.storeModel.findById(id).exec();
-    return result;
+    const pesquisa = await this.storeModel.findById(id).exec();
+    
+    if (!pesquisa) {
+      return null;
+    }
+
+    return pesquisa;
   }
 
   async findByEmail(valor: string) {
@@ -102,16 +107,16 @@ export class StoreService {
     }
   
     // Verifica se o novo ProductID já existe no array
-    // if (!ProductIDNovo.includes(ProductID)) {
+    if (!ProductIDNovo.includes(ProductID)) {
       // Adiciona o novo ID de produto ao array
       ProductIDNovo.push(ProductID);
-    // }
+    }
   
     const updatedStore = await this.storeModel
       .findByIdAndUpdate(StoreID, { product_id: ProductIDNovo }, { new: true })
       .exec();
   
-    console.log(updatedStore);
+
   
     return updatedStore;
   }

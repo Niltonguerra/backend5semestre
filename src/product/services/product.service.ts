@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product } from '../entities/product.entity';
 import { Model } from 'mongoose';
+import { RecomendacaoDTO } from '../dtos/Recomendacao.dto';
 
 
 
@@ -23,7 +24,26 @@ export class ProductService {
 
 
   async findAll(): Promise<Product[]> {
-    return this.productModel.find().exec();
+
+    const pesquisado  = await this.productModel.find().exec();
+
+    return pesquisado;
+  }
+
+
+
+  async findAllRecomendation(): Promise<RecomendacaoDTO[]> {
+
+    const pesquisado  = await this.productModel.find().exec();
+
+    const result: RecomendacaoDTO[] = pesquisado.map((product) => {
+      return {
+        _id: product._id.toString(),
+        tags: product.tags,
+      };
+    });
+    
+    return result;
   }
 
 

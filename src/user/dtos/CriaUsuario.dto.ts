@@ -1,4 +1,4 @@
-import { IsDate, isDate, IsEmail, IsNotEmpty, IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
+import { IsArray, IsDate, isDate, IsEmail, IsNotEmpty, IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
 import { IsTelefone } from '../decorator/telefone-brasil.decorator';
 import { EmailEhUnico } from '../decorator/email-eh-unico.decorator';
 import { ContainsUppercase } from '../decorator/upper-case.decorator';
@@ -50,5 +50,10 @@ export class CriaUsuarioDTO {
   @IsNotEmpty({ message: 'O endereço não pode ser vazio' })
   @IsString({ message: 'o Endereço deve ser uma string'})
   endereco: string[];
+
+
+  @IsNotEmpty({ message: 'As tags não podem ser vazias' })
+  @IsArray({ message: 'As tags devem ser strings'})
+  tags: string[];
 
 }

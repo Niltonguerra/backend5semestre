@@ -76,9 +76,8 @@ export class UserController {
 
     const newUser: User = {
       ...user,
-      usuario_ativo: false,
+      usuario_ativo: true,
       confirmado: false,
-      tags: [],
       historico: [],
       criado_em: new Date(),
       atualizado_em: new Date(),

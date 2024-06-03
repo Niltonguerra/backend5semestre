@@ -61,6 +61,16 @@ export class ProductController {
       atualizado_em: new Date(),
     }
 
+    const existeStore = await this.serviceStore.findById(product.store_id);
+
+
+    if (!existeStore) {
+      return {
+        message: 'Loja não encontrada',
+      };
+    }
+
+
     // cadastra do produto
     const retorno = await this.serviceProduct.create(newProduct);
 

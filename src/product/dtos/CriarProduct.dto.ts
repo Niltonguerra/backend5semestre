@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsUrl, MaxLength } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsString, IsUrl, MaxLength } from 'class-validator';
 
 
 
@@ -26,6 +26,9 @@ export class CriaProductDTO {
   @IsNumber({}, { message: 'A quantidade deve ser um número' })
   quantidade: number;
 
+  @IsNotEmpty({ message: 'As tags não podem ser vazias' })
+  @IsArray({ message: 'As tags devem ser strings'})
+  tags: string[];
 
   @IsNotEmpty({ message: 'A loja não pode ser vazia, o produto deve estar relacionado a alguma loja' })
   @IsString({ message: 'A loja deve ser uma string' })

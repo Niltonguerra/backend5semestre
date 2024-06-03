@@ -44,7 +44,7 @@ export class User {
 
   @Prop({ type:Date, required: false })
   atualizado_em: Date;
-
+  
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
