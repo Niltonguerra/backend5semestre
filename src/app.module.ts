@@ -9,10 +9,16 @@ import { APP_PIPE } from '@nestjs/core';
 import { PaymentModule } from './payment/payment.module';
 import { AuthModule } from './auth/auth.module';
 import { RecomendacaoModule } from './recomendacao/recomendacao.module';
+import * as dotenv from 'dotenv';
+
+
+const mongoUri = process.env.NODE_ENV === 'production'
+  ? process.env.MONGO_URI_PROD
+  : process.env.MONGO_URI_TEST;
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://niltondg30:1234567890@cluster0.l1fxv8v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
+    MongooseModule.forRoot('mongodb+srv://niltondg30:1234567890@cluster0.l1fxv8v.mongodb.net/producao?retryWrites=true&w=majority&appName=Cluster0'),
     UserModule,
     ProductModule,
     StoreModule,

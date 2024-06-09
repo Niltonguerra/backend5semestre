@@ -11,7 +11,7 @@
 /npm-debug.log*
 
 # Environment variables
-.env
+# .env
 
 # Build outputs
 /dist/
