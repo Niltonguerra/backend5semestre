@@ -19,7 +19,7 @@ const mongoUri = process.env.NODE_ENV === 'production'
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://niltondg30:1234567890@cluster0.l1fxv8v.mongodb.net/QA?retryWrites=true&w=majority&appName=Cluster0'),
+    MongooseModule.forRoot('mongodb+srv://niltondg30:1234567890@cluster0.l1fxv8v.mongodb.net/producao?retryWrites=true&w=majority&appName=Cluster0'),
     UserModule,
     ProductModule,
     StoreModule,
