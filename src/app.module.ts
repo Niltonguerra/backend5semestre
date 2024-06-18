@@ -1,15 +1,16 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
+import { UserModule } from './modules/user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductModule } from './product/product.module';
-import { StoreModule } from './store/store.module';
+import { ProductModule } from './modules/product/product.module';
+import { StoreModule } from './modules/store/store.module';
 import { APP_PIPE } from '@nestjs/core';
-import { PaymentModule } from './payment/payment.module';
-import { AuthModule } from './auth/auth.module';
-import { RecomendacaoModule } from './recomendacao/recomendacao.module';
-import * as dotenv from 'dotenv';
+import { PaymentModule } from './modules/payment/payment.module';
+import { AuthModule } from './modules/auth-user/auth.module';
+import { RecomendacaoModule } from './modules/recomendacao/recomendacao.module';
+import { AuthStoreModule } from './modules/auth-store/auth-store.module';
+
 
 
 const mongoUri = process.env.NODE_ENV === 'production'
@@ -18,13 +19,14 @@ const mongoUri = process.env.NODE_ENV === 'production'
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://niltondg30:1234567890@cluster0.l1fxv8v.mongodb.net/producao?retryWrites=true&w=majority&appName=Cluster0'),
+    MongooseModule.forRoot('mongodb+srv://niltondg30:1234567890@cluster0.l1fxv8v.mongodb.net/QA?retryWrites=true&w=majority&appName=Cluster0'),
     UserModule,
     ProductModule,
     StoreModule,
     PaymentModule,
     AuthModule,
     RecomendacaoModule,
+    AuthStoreModule,
   ],
   controllers: [AppController],
   providers: [
