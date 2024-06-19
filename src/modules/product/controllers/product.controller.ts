@@ -22,7 +22,6 @@ export class ProductController {
   async findProductsWithStore(@Param('nome') nome: string) {
     
 
-    console.log("teste de nilton: "+ nome)
     const storeId:string = await this.serviceStore.findByName(nome);
 
     
