@@ -42,7 +42,7 @@ export class UserController {
   }
 
 
-  @Post()
+  @Post('create')
   @UsePipes(new ValidationPipe(), HashPasswordPipe)
   async create(@Body() user: CriaUsuarioDTO): 
   Promise<{ usuario: ListaUsuarioRetorno; message: string }> {
@@ -63,7 +63,7 @@ export class UserController {
 
 
 // rota do usuário
-  @UseGuards(JwtStrategyUser, RolesGuardUser)
+  @UseGuards(JwtAuthGuardUser, RolesGuardUser)
   @Get('read')
   async findById(@Request() req): Promise<{ usuario: ListaUsuarioDTO; message: string }> {
 

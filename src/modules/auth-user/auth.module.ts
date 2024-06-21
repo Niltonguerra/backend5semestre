@@ -11,8 +11,6 @@ import { RolesGuardUser } from './guards/roles-user.guard';
 import { JwtAuthGuardUser } from './guards/jwt-auth-user.guard';
 import { PassportModule } from '@nestjs/passport';
 
-
-
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),

@@ -1,26 +1,29 @@
-import { Body, Controller, Get, Param, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { JwtAuthGuardUser } from 'src/modules/auth-user/guards/jwt-auth-user.guard';
 import { RolesGuardUser } from 'src/modules/auth-user/guards/roles-user.guard';
-import { JwtStrategyUser } from 'src/modules/auth-user/strategies/jwt-user.strategy';
 import { ProductService } from 'src/modules/product/services/product.service';
-import { StoreService } from 'src/modules/store/services/store.service';
 import { UserService } from 'src/modules/user/services/user.service';
+import { recomendacaoDTO } from '../dtos/recomendacaoDTO';
 
 @Controller('recomendacao')
 export class RecomendacaoController {
 
 
   constructor(
-    private readonly storeService: StoreService,
     private readonly productService: ProductService,
     private readonly userService: UserService,
   ) {}
 
   // recomendações de produtos para um usuário
-  @UseGuards(JwtStrategyUser, RolesGuardUser)
+  @UseGuards(JwtAuthGuardUser, RolesGuardUser)
   @Get("usuario")
   async productRecomendation(@Request() req) {
 
     const userId = req.user.userId;
+
+
+    console.log('user:', userId);
+
 
     const user = await this.userService.findById(userId);
 
@@ -30,15 +33,24 @@ export class RecomendacaoController {
 
     const products = await this.productService.findAllRecomendation();
 
-    const recommendations = products.map(product => ({
-      productId: product._id,
+    const recommendations:recomendacaoDTO[] = products.map(product => ({
+      nome: product.nome,
+      preco: product.preco,
+      descricao: product.descricao,
+      foto: product.foto,
+      quantidade: product.quantidade,
+      tags: product.tags,
+      criado_em:  product.criado_em,
+      atualizado_em: product.atualizado_em,
       similarity: this.jaccardSimilarity(user.tags, product.tags),
     }));
 
     // Ordenar produtos pela similaridade (maior primeiro)
     recommendations.sort((a, b) => b.similarity - a.similarity);
 
-    return recommendations.length > 0 ? recommendations : { message: 'No recommendations found' };
+    const recomendacao = recommendations.length > 0 ? recommendations : { message: 'No recommendations found' };
+    
+    return recomendacao
   }
 
 

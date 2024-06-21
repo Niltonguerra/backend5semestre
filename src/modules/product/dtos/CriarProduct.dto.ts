@@ -30,8 +30,4 @@ export class CriaProductDTO {
   @IsArray({ message: 'As tags devem ser strings'})
   tags: string[];
 
-
-
-  
-
 }
